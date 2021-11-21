@@ -5,6 +5,7 @@ This repository is for quera challenges that i solved.
 ## Dots
 
 ![alt text](https://i.ibb.co/NsxkXFK/image.png)
+
 This challenge will count dots of your phrase that enter in input.
 
 ## Requester
