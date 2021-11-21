@@ -4,7 +4,9 @@ This repository is for quera challenges that i solved.
 
 Challenges info. :
 [Dots](https://github.com/Javad-Smn/quera.ir#dots)
+
 [Requester](https://github.com/Javad-Smn/quera.ir#requester)
+
 [Typing test](https://github.com/Javad-Smn/quera.ir#typing-test)
 
 ## Dots
