@@ -6,9 +6,7 @@ let wpmText = document.getElementById("wpm");
 let errorText = document.getElementById("errors");
 let timerText = document.getElementById("time");
 let accuracyText = document.getElementById("accuracy");
-
 let typeText = document.getElementById("type-text");
-
 let textArea = document.getElementById("textarea");
 
 let timeLeft = 0;
@@ -25,8 +23,9 @@ textArea.addEventListener("input", update);
 
 function initializeTest({ timeLimit, text }) {
   document.querySelector("#time").innerHTML = timeLimit;
+  textArea.innerHTML = '';
   text.split('').forEach(c => {
-    document.querySelector("#type-text").innerHTML += `<span>${c}</span>`
+    typeText.innerHTML += `<span>${c}</span>`
   });
 }
 
@@ -42,6 +41,8 @@ function update(e) {
 }
 
 function updateCharactersStatus(e) {
+  const textLength = typeText.children.length;
+  const typeLength = textArea.value.length;
   let spans = document.querySelectorAll("#type-text span");
   let letters = [...e?.target?.value]?.filter(c => c);
   let letterNum = letters?.length-1;
@@ -57,6 +58,12 @@ function updateCharactersStatus(e) {
       spans[letterNum].className = "incorrect-char";
     }
   });
+  
+  if( textLength === typeLength ) {
+    finishTest();
+    clearInterval(timer);
+    return;
+  }
 }
 
 function updateAccuracy() {
@@ -70,7 +77,11 @@ function updateErrors() {
 
 function updateWpm() {
   timeElapsed = 60 - timeLeft;
-  document.querySelector("#wpm").innerHTML = Math.ceil( ((typedCharacter/5)/timeElapsed)*60 );
+  if( typedCharacter !== 1 ) {
+    document.querySelector("#wpm").innerHTML = Math.ceil( ((typedCharacter/5)/timeElapsed)*60 );
+  } else {
+    document.querySelector("#wpm").innerHTML = 0;
+  }
 }
 
 function updateTimer() {
@@ -79,7 +90,7 @@ function updateTimer() {
   if( timeLeft == 0 ) {
     finishTest();
     clearInterval(timer);
-    return
+    return;
   }
   document.querySelector("#time").innerHTML-= 1;
 }
